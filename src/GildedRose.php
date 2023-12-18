@@ -18,6 +18,7 @@ class GildedRose implements TickableInterface
             'normal' => Product::class,
             'Aged Brie' => Brie::class,
             'Backstage passes to a TAFKAL80ETC concert' => Pass::class,
+            'Conjured Mana Cake' => Cake::class,
             default => throw new Exception('Invalid product name ' . $name)
         };
     }
