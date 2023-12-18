@@ -4,22 +4,16 @@ namespace App;
 
 class Product extends GildedRose
 {
-    public function tick()
+    public function tick(): void
     {
 
-        $this->sellIn -= 1;
-        $this->quality -= 1;
+        $this->_sellIn -= 1;
+        $this->_quality -= 1;
         
-        if ($this->sellIn <= 0) {
-            $this->quality -= 1;
+        if ($this->_sellIn <= 0) {
+            $this->_quality -= 1;
         }
         
-        if ($this->quality < 0) {
-            $this->quality = 0;
-        }
-
-        if ($this->quality > 50) {
-            $this->quality = 50;
-        }
+        $this->qualityCheckout();
     }
 }

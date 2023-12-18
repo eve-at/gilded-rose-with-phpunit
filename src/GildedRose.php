@@ -4,44 +4,52 @@ namespace App;
 
 use Exception;
 
-class GildedRose
+class GildedRose implements TickableInterface
 {
-    public $name;
-
-    public $quality;
-
-    public $sellIn;
-
-    public function __construct($name, $quality, $sellIn)
+    public function __construct(protected string $_name, protected int $_quality, protected int $_sellIn)
     {
-        $this->name = $name;
-        $this->quality = $quality;
-        $this->sellIn = $sellIn;
+        //
     }
 
-    final private static function resolveClass($name): string
+    final private static function resolveClass(string $name): string
     {
-        switch($name) {
-            case 'Sulfuras, Hand of Ragnaros':
-                return Sulfuras::class;
-            case 'normal':
-                return Product::class;
-            case 'Aged Brie':
-                return Brie::class;
-            case 'Backstage passes to a TAFKAL80ETC concert':
-                return Pass::class;
-            default:
-                throw new Exception('Invalid product name ' . $name);
-        }
+        return match($name) {
+            'Sulfuras, Hand of Ragnaros' => Sulfuras::class,
+            'normal' => Product::class,
+            'Aged Brie' => Brie::class,
+            'Backstage passes to a TAFKAL80ETC concert' => Pass::class,
+            default => throw new Exception('Invalid product name ' . $name)
+        };
     }
 
-    final public static function of($name, $quality, $sellIn)
+    final public static function of(string $name, int $quality, int $sellIn): TickableInterface
     {
         return new (static::resolveClass($name))($name, $quality, $sellIn);
     }
 
-    public function tick()
+    public function tick(): void
     {
         //
+    }
+
+    public function qualityCheckout(): void
+    {
+        if ($this->_quality < 0) {
+            $this->_quality = 0;
+        }
+
+        if ($this->_quality > 50) {
+            $this->_quality = 50;
+        }    
+    }
+
+    public function __get($property): mixed
+    {
+        return match($property) {
+            'name' => $this->_name,
+            'quality' => $this->_quality,
+            'sellIn' => $this->_sellIn,
+            default => throw new Exception('Error: Cannot access property ' . $property),
+        };
     }
 }
