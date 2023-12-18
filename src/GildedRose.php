@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class GildedRose
 {
     public $name;
@@ -17,58 +19,29 @@ class GildedRose
         $this->sellIn = $sellIn;
     }
 
-    public static function of($name, $quality, $sellIn)
+    final private static function resolveClass($name): string
     {
-        return new static($name, $quality, $sellIn);
+        switch($name) {
+            case 'Sulfuras, Hand of Ragnaros':
+                return Sulfuras::class;
+            case 'normal':
+                return Product::class;
+            case 'Aged Brie':
+                return Brie::class;
+            case 'Backstage passes to a TAFKAL80ETC concert':
+                return Pass::class;
+            default:
+                throw new Exception('Invalid product name ' . $name);
+        }
+    }
+
+    final public static function of($name, $quality, $sellIn)
+    {
+        return new (static::resolveClass($name))($name, $quality, $sellIn);
     }
 
     public function tick()
     {
-
-        if ($this->name === 'Sulfuras, Hand of Ragnaros') {
-            return;
-        }
-
-        if ($this->name === 'normal') {
-            $this->sellIn -= 1;
-            $this->quality -= 1;
-            
-            if ($this->sellIn <= 0) {
-                $this->quality -= 1;
-            }
-        }
-
-        if ($this->name === 'Aged Brie') {
-            $this->sellIn -= 1;
-
-            if ($this->sellIn <= 0) {
-                $this->quality += 1;  
-            } 
-
-            $this->quality += 1;   
-        }
-
-        if ($this->name === 'Backstage passes to a TAFKAL80ETC concert') {
-            
-            $this->quality += 1;    
-
-            if ($this->sellIn <= 0) {
-                $this->quality = 0;  
-            } else if ($this->sellIn <= 5) {
-                $this->quality += 2;  
-            } else if ($this->sellIn <= 10) {
-                $this->quality += 1;  
-            } 
-
-            $this->sellIn -= 1;
-        }
-
-        if ($this->quality < 0) {
-            $this->quality = 0;
-        }
-
-        if ($this->quality > 50) {
-            $this->quality = 50;
-        }
+        //
     }
 }
