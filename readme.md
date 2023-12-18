@@ -16,3 +16,15 @@ You'll find two Git branches. The `completed` branch will contain the finished s
 
 1. Refactor the `GildedRose` class
 2. Add the new "Conjured" item type.
+
+Installation
+```
+git clone https://github.com/eve-at/gilded-rose-with-phpunit
+cd gilded-rose-with-phpunit/
+composer install
+```
+
+Run tests
+```
+.\vendor\bin\phpunit --colors tests
+```
