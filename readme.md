@@ -10,12 +10,18 @@ Original Kata and Description:
 https://github.com/notmyself/GildedRose
 ```
 
-You'll find two Git branches. The `completed` branch will contain the finished source code. The master branch is a starting position for the refactor.
+You'll find three Git branches:
+- The `master` branch was the starting position for the refactor;
+- The `feature/wip` branch was used durring refactor;
+- The `completed` contain the finished source code.
 
-## The Job will be
+## The Job was
 
-1. Refactor the `GildedRose` class
-2. Add the new "Conjured" item type.
+1. Refactor the `GildedRose` class;
+2. Add the new "Conjured" item type;
+3. Implement some PHP8 features.
+
+##
 
 Installation
 ```
