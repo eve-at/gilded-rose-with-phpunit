@@ -6,6 +6,9 @@ use Exception;
 
 class GildedRose implements TickableInterface
 {
+        
+    protected int $qualityDropPerDay = 1;
+
     public function __construct(protected string $_name, protected int $_quality, protected int $_sellIn)
     {
         //

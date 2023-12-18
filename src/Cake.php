@@ -2,17 +2,7 @@
 
 namespace App;
 
-class Cake extends GildedRose
+class Cake extends Product
 {
-    public function tick(): void
-    {
-        $this->_sellIn -= 1;
-        $this->_quality -= 2;
-        
-        if ($this->_sellIn <= 0) {
-            $this->_quality -= 2;
-        }
-        
-        $this->qualityCheckout();
-    }
+    protected int $qualityDropPerDay = 2;
 }

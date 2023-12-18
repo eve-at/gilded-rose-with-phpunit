@@ -9,10 +9,10 @@ class Brie extends GildedRose
         $this->_sellIn -= 1;
 
         if ($this->_sellIn <= 0) {
-            $this->_quality += 1;  
+            $this->_quality += $this->qualityDropPerDay;  
         } 
 
-        $this->_quality += 1;   
+        $this->_quality += $this->qualityDropPerDay;   
 
         $this->qualityCheckout();
     }
